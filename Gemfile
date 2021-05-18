@@ -58,3 +58,4 @@ gem 'simplecov', require: false, group: :test
 gem 'annotate'
 gem 'devise', '~> 4.8'
 gem "letter_opener", group: :development
+gem 'activeadmin'
