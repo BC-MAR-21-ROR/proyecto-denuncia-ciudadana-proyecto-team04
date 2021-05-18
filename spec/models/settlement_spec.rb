@@ -19,5 +19,16 @@
 require 'rails_helper'
 
 RSpec.describe Settlement, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'valid factory' do
+    it { expect(build(:settlement)).to be_valid }
+  end
+
+  describe 'associations' do
+    it { should belong_to(:municipality) }
+    it { should have_many(:postal_codes) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
 end

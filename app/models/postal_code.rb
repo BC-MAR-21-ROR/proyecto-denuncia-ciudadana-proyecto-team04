@@ -18,4 +18,6 @@
 #
 class PostalCode < ApplicationRecord
   belongs_to :settlement
+
+  validates :code, presence: true
 end

@@ -18,4 +18,7 @@
 #
 class Settlement < ApplicationRecord
   belongs_to :municipality
+  has_many :postal_codes
+
+  validates :name, presence: true
 end

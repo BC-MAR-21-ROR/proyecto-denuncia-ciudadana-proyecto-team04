@@ -8,4 +8,7 @@
 #  updated_at :datetime         not null
 #
 class State < ApplicationRecord
+  has_many :municipalities
+
+  validates :name, presence: true, uniqueness: true
 end

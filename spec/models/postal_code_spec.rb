@@ -19,5 +19,15 @@
 require 'rails_helper'
 
 RSpec.describe PostalCode, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'valid factory' do
+    it { expect(build(:postal_code)).to be_valid }
+  end
+
+  describe 'associations' do
+    it { should belong_to(:settlement) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:code) }
+  end
 end

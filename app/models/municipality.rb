@@ -18,4 +18,7 @@
 #
 class Municipality < ApplicationRecord
   belongs_to :state
+  has_many :settlements
+
+  validates :name, presence: true
 end
