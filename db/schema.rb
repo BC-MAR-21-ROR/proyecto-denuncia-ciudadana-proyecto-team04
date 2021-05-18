@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_012916) do
+ActiveRecord::Schema.define(version: 2021_05_18_015944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,36 @@ ActiveRecord::Schema.define(version: 2021_05_18_012916) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "municipalities", force: :cascade do |t|
+    t.string "name"
+    t.bigint "state_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["state_id"], name: "index_municipalities_on_state_id"
+  end
+
+  create_table "postal_codes", force: :cascade do |t|
+    t.string "code"
+    t.bigint "settlement_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["settlement_id"], name: "index_postal_codes_on_settlement_id"
+  end
+
+  create_table "settlements", force: :cascade do |t|
+    t.string "name"
+    t.bigint "municipality_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["municipality_id"], name: "index_settlements_on_municipality_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -57,4 +87,7 @@ ActiveRecord::Schema.define(version: 2021_05_18_012916) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "municipalities", "states"
+  add_foreign_key "postal_codes", "settlements"
+  add_foreign_key "settlements", "municipalities"
 end
